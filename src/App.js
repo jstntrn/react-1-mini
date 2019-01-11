@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   updatePicture(event) { //example of executing the function with the event and referencing event.target.value in the setState
-    this.setState({
+    this.setState({ //setState is a method that gets passed in a object parameter, thus setState({})
       picture: event.target.value
     })  
   }
@@ -27,9 +27,7 @@ class App extends Component {
   }
 
   addFriend() {
-    const {friends, picture, name} = this.state; //object deconstructor
-
-    let newFriends = friends.slice(); //create copy of current friends array
+    const {friends: newFriends, picture, name} = this.state; //object deconstructor, rename friends array
     newFriends.push({picture, name}) //push new friends entry to new array
 
     this.setState({
@@ -37,6 +35,8 @@ class App extends Component {
       picture: '', //reset value state of picture input box to blank string
       name: '' //reset value state of name input box to blank string
     })
+    console.log(this.state.friends);
+    
   }
   
   //creates display for array of friends
@@ -64,12 +64,12 @@ class App extends Component {
 
     return (
       <div>
-        <span>Picture:</span>
+        <label>Picture:</label>
         <input 
           onChange = {this.updatePicture} 
           value = {this.state.picture}/>
 
-        <span>Name:</span>
+        <label>Name:</label>
         <input
           onChange = { (e) => this.updateName(e.target.value) }
           value = {this.state.name}/>
